@@ -1,0 +1,6 @@
+interface:
+  display_name: Humanizer FR
+  short_description: Humanise les textes FR/EN
+  default_prompt: Humanise ce texte sans modifier son sens ni inventer de faits. Si le texte est en français, applique d'abord les patterns français.
+policy:
+  allow_implicit_invocation: true

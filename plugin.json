@@ -1,0 +1,32 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "humanizer-fr",
+  "version": "3.1.1",
+  "description": "Humanize French and English prose by removing recurring AI-writing patterns while preserving meaning, facts, voice, and source constraints.",
+  "homepage": "https://github.com/blader/humanizer",
+  "repository": "https://github.com/blader/humanizer",
+  "license": "MIT",
+  "author": {
+    "name": "Adapted from blader/humanizer for ChatGPT"
+  },
+  "keywords": [
+    "writing",
+    "editing",
+    "humanizer",
+    "french",
+    "style"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Humanizer FR",
+        "shortDescription": "Natural French and English",
+        "longDescription": "Rewrites AI-sounding French and English prose so it reads naturally while preserving supported facts, meaning, citations, technical content and the writer's voice. Includes French-specific LLM patterns and corporate-language tells.",
+        "developerName": "Damien / blader adaptation",
+        "category": "Productivity",
+        "capabilities": [],
+        "defaultPrompt": "Humanize this text without changing its meaning or inventing facts. If it is French, apply the French-specific patterns first."
+      }
+    }
+  }
+}

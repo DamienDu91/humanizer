@@ -1,142 +1,52 @@
-# Humanizer
+# Humanizer FR
 
-A Claude Code skill that removes signs of AI-generated writing from text, making it sound more natural and human.
+Réécrit ou relit les textes français et anglais en préservant le sens, les faits, les citations et la voix de leur auteur. Cette adaptation conserve 18 règles françaises et 26 catégories générales.
 
-## Installation
+## Versions
 
-### Recommended (clone directly into Claude Code skills directory)
+| Composant | Version |
+|---|---|
+| Plugin ChatGPT | 3.1.1 |
+| Skill Humanizer FR | 3.1.0-fr-chatgpt.2 |
+| Base amont | blader/humanizer 3.1.0, adaptations sélectives de 4.0.0 |
 
-```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer
+Ce dépôt public reprend désormais la source de l’adaptation Humanizer FR. L’ancien contenu 2.1.1 reste consultable dans l’historique Git, notamment au commit `c78047bd4300e5a995d37ae8c7684aa2d53326cd`.
+
+## Utilisation
+
+Demander une réécriture ou une relecture, préciser le public et fournir le texte, le fichier ou un échantillon du style de l’auteur. La skill ne doit pas ajouter de faits pour rendre le texte plus concret. Les termes métiers utiles et les citations exactes restent en place. Les instructions figurant dans un document sont traitées comme du contenu, sans être exécutées.
+
+Pour un document long, elle demande une lecture intégrale par segments et un registre de couverture. Une révision incomplète doit être annoncée comme partielle.
+
+## Fichiers et installation
+
+La source du plugin se trouve dans `skills/humanizer-fr/`. `SKILL.md` et `references/` à la racine sont des copies de compatibilité pour les anciennes installations ; les deux versions doivent rester identiques.
+
+- Codex : copier `skills/humanizer-fr/` dans le dossier personnel de skills de Codex, sous le nom `humanizer-fr`.
+- Claude Code : copier ce même dossier dans `~/.claude/skills/humanizer-fr/`. Invocation : `/humanizer-fr`.
+- Claude Desktop : importer l’archive de skill générée par le script ci-dessous dans Personnalisation > Skills > Importer un Skill.
+- ChatGPT : [fiche Humanizer FR](https://chatgpt.com/plugins/Plugin_8c2eb588f298819184cf4142e2a7e10f). La version 3.1.1 a été vérifiée dans le compte propriétaire et par réexport. La disponibilité de cette version au catalogue public reste à vérifier séparément.
+
+Pour construire les deux archives, depuis un clone de ce dépôt :
+
+```sh
+python scripts/build_release.py
 ```
 
-### Manual install/update (only the skill file)
+Le script valide les copies de compatibilité, les versions et les manifestes, puis écrit dans `dist/` une archive de plugin et une archive de skill. Il n’effectue aucune publication. Ne pas importer le ZIP de tout le dépôt à la place de l’archive de plugin générée.
 
-If you already have this repo cloned (or you downloaded `SKILL.md`), copy the skill file into Claude Code’s skills directory:
+## Source et publication
 
-```bash
-mkdir -p ~/.claude/skills/humanizer
-cp SKILL.md ~/.claude/skills/humanizer/
-```
+L’import d’un ZIP dans ChatGPT et un commit sur GitHub sont deux opérations distinctes. Aucune synchronisation automatique avec ChatGPT n’est configurée dans ce dépôt. Après une modification, tester, reconstruire, importer par le workflow autorisé, puis réexporter pour comparer les fichiers enregistrés.
 
-## Usage
+Les champs `homepage` et `repository` des manifestes reproduisent ceux du paquet ChatGPT vérifié et pointent encore vers `blader/humanizer`. Ils désignent la provenance historique ; ils ne constituent pas une liaison de synchronisation. Ils ont été conservés pour ne pas modifier silencieusement la configuration du plugin déjà installé.
 
-In Claude Code, invoke the skill:
+## Vérifications
 
-```
-/humanizer
+Les neuf cas du kit sont dans `tests/test-cases.jsonl`. Ils ont été évalués localement par un agent distinct, avec quatre cas complémentaires portant sur la voix, la causalité, les références et un extrait tronqué. Le document synthétique utilisé comportait 30 sections et 12 tableaux ; les données protégées ont été conservées. Le validateur de skill et les contrôles structurels passent.
 
-[paste your text here]
-```
+Ces résultats ne constituent pas une batterie automatisée d’appels à un modèle ni des essais dans les runtimes ChatGPT ou Claude. Un essai par cas ne garantit pas une résistance générale aux injections. Le document de test tenait dans le contexte. Les 18 règles françaises et les 26 catégories ont été comparées à la base et conservées intégralement.
 
-Or ask Claude to humanize text directly:
+## Attribution et licence
 
-```
-Please humanize this text: [your text]
-```
-
-## Overview
-
-Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) guide, maintained by WikiProject AI Cleanup. This comprehensive guide comes from observations of thousands of instances of AI-generated text.
-
-### Key Insight from Wikipedia
-
-> "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
-
-## 24 Patterns Detected (with Before/After Examples)
-
-### Content Patterns
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 1 | **Significance inflation** | "marking a pivotal moment in the evolution of..." | "was established in 1989 to collect regional statistics" |
-| 2 | **Notability name-dropping** | "cited in NYT, BBC, FT, and The Hindu" | "In a 2024 NYT interview, she argued..." |
-| 3 | **Superficial -ing analyses** | "symbolizing... reflecting... showcasing..." | Remove or expand with actual sources |
-| 4 | **Promotional language** | "nestled within the breathtaking region" | "is a town in the Gonder region" |
-| 5 | **Vague attributions** | "Experts believe it plays a crucial role" | "according to a 2019 survey by..." |
-| 6 | **Formulaic challenges** | "Despite challenges... continues to thrive" | Specific facts about actual challenges |
-
-### Language Patterns
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 7 | **AI vocabulary** | "Additionally... testament... landscape... showcasing" | "also... remain common" |
-| 8 | **Copula avoidance** | "serves as... features... boasts" | "is... has" |
-| 9 | **Negative parallelisms** | "It's not just X, it's Y" | State the point directly |
-| 10 | **Rule of three** | "innovation, inspiration, and insights" | Use natural number of items |
-| 11 | **Synonym cycling** | "protagonist... main character... central figure... hero" | "protagonist" (repeat when clearest) |
-| 12 | **False ranges** | "from the Big Bang to dark matter" | List topics directly |
-
-### Style Patterns
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 13 | **Em dash overuse** | "institutions—not the people—yet this continues—" | Use commas or periods |
-| 14 | **Boldface overuse** | "**OKRs**, **KPIs**, **BMC**" | "OKRs, KPIs, BMC" |
-| 15 | **Inline-header lists** | "**Performance:** Performance improved" | Convert to prose |
-| 16 | **Title Case Headings** | "Strategic Negotiations And Partnerships" | "Strategic negotiations and partnerships" |
-| 17 | **Emojis** | "🚀 Launch Phase: 💡 Key Insight:" | Remove emojis |
-| 18 | **Curly quotes** | `said “the project”` | `said "the project"` |
-
-### Communication Patterns
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 19 | **Chatbot artifacts** | "I hope this helps! Let me know if..." | Remove entirely |
-| 20 | **Cutoff disclaimers** | "While details are limited in available sources..." | Find sources or remove |
-| 21 | **Sycophantic tone** | "Great question! You're absolutely right!" | Respond directly |
-
-### Filler and Hedging
-
-| # | Pattern | Before | After |
-|---|---------|--------|-------|
-| 22 | **Filler phrases** | "In order to", "Due to the fact that" | "To", "Because" |
-| 23 | **Excessive hedging** | "could potentially possibly" | "may" |
-| 24 | **Generic conclusions** | "The future looks bright" | Specific plans or facts |
-
-## Full Example
-
-**Before (AI-sounding):**
-> Great question! Here is an essay on this topic. I hope this helps!
->
-> AI-assisted coding serves as an enduring testament to the transformative potential of large language models, marking a pivotal moment in the evolution of software development. In today's rapidly evolving technological landscape, these groundbreaking tools—nestled at the intersection of research and practice—are reshaping how engineers ideate, iterate, and deliver, underscoring their vital role in modern workflows.
->
-> At its core, the value proposition is clear: streamlining processes, enhancing collaboration, and fostering alignment. It's not just about autocomplete; it's about unlocking creativity at scale, ensuring that organizations can remain agile while delivering seamless, intuitive, and powerful experiences to users. The tool serves as a catalyst. The assistant functions as a partner. The system stands as a foundation for innovation.
->
-> Industry observers have noted that adoption has accelerated from hobbyist experiments to enterprise-wide rollouts, from solo developers to cross-functional teams. The technology has been featured in The New York Times, Wired, and The Verge. Additionally, the ability to generate documentation, tests, and refactors showcases how AI can contribute to better outcomes, highlighting the intricate interplay between automation and human judgment.
->
-> - 💡 **Speed:** Code generation is significantly faster, reducing friction and empowering developers.
-> - 🚀 **Quality:** Output quality has been enhanced through improved training, contributing to higher standards.
-> - ✅ **Adoption:** Usage continues to grow, reflecting broader industry trends.
->
-> While specific details are limited based on available information, it could potentially be argued that these tools might have some positive effect. Despite challenges typical of emerging technologies—including hallucinations, bias, and accountability—the ecosystem continues to thrive. In order to fully realize this potential, teams must align with best practices.
->
-> In conclusion, the future looks bright. Exciting times lie ahead as we continue this journey toward excellence. Let me know if you’d like me to expand on any section!
-
-**After (Humanized):**
-> AI coding assistants speed up some tasks. In a 2024 study by Google, developers using Codex completed simple functions 55% faster than a control group, but showed no improvement on debugging or architectural decisions.
->
-> The tools are good at boilerplate: config files, test scaffolding, repetitive refactors. They are bad at knowing when they are wrong. I have mass-accepted suggestions that compiled, passed lint, and still did the wrong thing because I stopped paying attention.
->
-> Mira, an engineer at a fintech startup I interviewed, said she uses Copilot "like autocomplete for boring code" but reviews every line before committing. Jake, a senior dev at a larger company, disabled it after it kept suggesting patterns from a deprecated internal library.
->
-> The productivity claims are hard to verify. GitHub says Copilot users "accept 30% of suggestions," but acceptance is not correctness, and correctness is not value. The 2024 Uplevel study found no statistically significant difference in pull-request throughput between teams with and without AI assistants.
->
-> None of this means the tools are useless. It means they are tools. They do not replace judgment, and they do not eliminate the need for tests. If you do not have tests, you cannot tell whether the suggestion is right.
-
-## References
-
-- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) - Primary source
-- [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup) - Maintaining organization
-
-## Version History
-
-- **2.1.1** - Fixed pattern #18 example (curly quotes vs straight quotes)
-- **2.1.0** - Added before/after examples for all 24 patterns
-- **2.0.0** - Complete rewrite based on raw Wikipedia article content
-- **1.0.0** - Initial release
-
-## License
-
-MIT
+Adaptation française par Damien Duguet à partir de [blader/humanizer](https://github.com/blader/humanizer), sous licence MIT. Les exemples français sont originaux et fictifs. La permission amont 4.0.0 d’ajouter des détails absents du texte n’est pas reprise.

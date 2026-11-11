@@ -3,13 +3,19 @@
     "displayName": "Humanizer FR",
     "shortDescription": "Natural French and English",
     "longDescription": "Rewrites AI-sounding French and English prose so it reads naturally while preserving supported facts, meaning, citations, technical content and the writer's voice. Includes French-specific LLM patterns and corporate-language tells.",
-    "developerName": "Damien / blader adaptation",
+    "developerName": "Damien Duguet",
     "category": "Productivity",
     "capabilities": [],
-    "defaultPrompt": "Humanize this text without changing its meaning or inventing facts. If it is French, apply the French-specific patterns first."
+    "defaultPrompt": "Humanize this text without changing its meaning or inventing facts. If it is French, apply the French-specific patterns first.",
+    "websiteURL": "https://damienduguet.com",
+    "supportURL": "https://github.com/DamienDu91/humanizer/issues",
+    "privacyPolicyURL": "https://github.com/DamienDu91/humanizer/blob/main/docs/CONFIDENTIALITE.md",
+    "termsOfServiceURL": "https://github.com/DamienDu91/humanizer/blob/main/docs/CONDITIONS.md",
+    "logo": "assets/humanizer-fr.png",
+    "composerIcon": "assets/humanizer-fr.png"
   },
   "name": "humanizer-fr",
-  "version": "3.1.1",
+  "version": "3.1.3",
   "description": "Humanize French and English prose by removing recurring AI-writing patterns while preserving meaning, facts, voice, and source constraints.",
   "author": {
     "name": "Adapted from blader/humanizer for ChatGPT"
@@ -21,8 +27,8 @@
     "french",
     "style"
   ],
-  "homepage": "https://github.com/blader/humanizer",
-  "repository": "https://github.com/blader/humanizer",
+  "homepage": "https://damienduguet.com",
+  "repository": "https://github.com/DamienDu91/humanizer",
   "license": "MIT",
   "skills": "./skills"
 }

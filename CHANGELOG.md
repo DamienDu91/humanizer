@@ -1,5 +1,17 @@
 # Changelog
 
+## Plugin 3.1.3 / skill 3.1.0-fr-chatgpt.2
+
+- Preserve the skill unchanged from the verified 3.1.2 owner export.
+- Add a speech-bubble and pen icon with a French tricolor detail.
+- Set Damien Duguet as publisher, add his website and point the repository to this adaptation.
+- Include approved privacy and terms URLs, active GitHub Issues support, review prompts and worldwide targeting.
+- Prepare the public submission separately; no claim of approval or publication.
+
+## Plugin 3.1.2
+
+- Owner export confirms homepage updated to https://damienduguet.com.
+
 ## Plugin 3.1.1 / skill 3.1.0-fr-chatgpt.2
 
 - Replace the old 2.1.1 repository entry point with the verified French adaptation.

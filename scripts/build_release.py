@@ -25,6 +25,7 @@ def archive(path,entries):
     with zipfile.ZipFile(path) as z: assert z.testzip() is None
 plugin_entries=[(root/p,p) for p in ('plugin.json','.codex-plugin/plugin.json')]
 plugin_entries.extend((p,p.relative_to(root).as_posix()) for p in sorted(skill.rglob('*')) if p.is_file())
+plugin_entries.extend((p,p.relative_to(root).as_posix()) for p in sorted((root/'assets').rglob('*')) if p.is_file())
 archive(dist/f'humanizer-fr-plugin-{version}.zip',plugin_entries)
 archive(dist/f'humanizer-fr-skill-{skill_version}.zip',[(p,p.relative_to(skill).as_posix()) for p in sorted(skill.rglob('*')) if p.is_file() and 'agents' not in p.relative_to(skill).parts])
 print(f'Validated plugin {version}, skill {skill_version}; archives written to {dist}')

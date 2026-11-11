@@ -6,7 +6,7 @@ Réécrit ou relit les textes français et anglais en préservant le sens, les f
 
 | Composant | Version |
 |---|---|
-| Plugin ChatGPT | 3.1.1 |
+| Paquet du plugin préparé pour publication | 3.1.3 |
 | Skill Humanizer FR | 3.1.0-fr-chatgpt.2 |
 | Base amont | blader/humanizer 3.1.0, adaptations sélectives de 4.0.0 |
 
@@ -25,7 +25,7 @@ La source du plugin se trouve dans `skills/humanizer-fr/`. `SKILL.md` et `refere
 - Codex : copier `skills/humanizer-fr/` dans le dossier personnel de skills de Codex, sous le nom `humanizer-fr`.
 - Claude Code : copier ce même dossier dans `~/.claude/skills/humanizer-fr/`. Invocation : `/humanizer-fr`.
 - Claude Desktop : importer l’archive de skill générée par le script ci-dessous dans Personnalisation > Skills > Importer un Skill.
-- ChatGPT : [fiche Humanizer FR](https://chatgpt.com/plugins/Plugin_8c2eb588f298819184cf4142e2a7e10f). La version 3.1.1 a été vérifiée dans le compte propriétaire et par réexport. La disponibilité de cette version au catalogue public reste à vérifier séparément.
+- ChatGPT : [fiche personnelle Humanizer FR](https://chatgpt.com/plugins/Plugin_8c2eb588f298819184cf4142e2a7e10f). La version 3.1.2 a été vérifiée par réexport après ajout du site de l’éditeur. Le paquet 3.1.3 ajoute l’icône française et les informations de publication. Sa préparation et son dépôt ne prouvent pas sa publication au catalogue public.
 
 Pour construire les deux archives, depuis un clone de ce dépôt :
 
@@ -39,7 +39,9 @@ Le script valide les copies de compatibilité, les versions et les manifestes, p
 
 L’import d’un ZIP dans ChatGPT et un commit sur GitHub sont deux opérations distinctes. Aucune synchronisation automatique avec ChatGPT n’est configurée dans ce dépôt. Après une modification, tester, reconstruire, importer par le workflow autorisé, puis réexporter pour comparer les fichiers enregistrés.
 
-Les champs `homepage` et `repository` des manifestes reproduisent ceux du paquet ChatGPT vérifié et pointent encore vers `blader/humanizer`. Ils désignent la provenance historique ; ils ne constituent pas une liaison de synchronisation. Ils ont été conservés pour ne pas modifier silencieusement la configuration du plugin déjà installé.
+Le champ `homepage` pointe vers le [site de Damien Duguet](https://damienduguet.com) et `repository` vers ce dépôt. La provenance amont reste attribuée ci-dessous. Aucun de ces champs ne crée une synchronisation automatique avec ChatGPT.
+
+[Présentation et support](docs/HUMANIZER-FR.md) · [Confidentialité](docs/CONFIDENTIALITE.md) · [Conditions d’utilisation](docs/CONDITIONS.md)
 
 ## Vérifications
 
